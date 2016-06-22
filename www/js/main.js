@@ -47,4 +47,32 @@
 			break;
 		}
 	}
+	$('#searchform').on('submit', function (e) {
+		var typedsearchkey = $('#searchkey').val();
+		// console.log(typedsearchkey);
+		e.preventDefault();
+		var updater = routes(function() {
+			// console.log(this);
+			var re = new RegExp(typedsearchkey, "i");
+			// console.log(re);
+			if (this.route_short_name == typedsearchkey || this.route_long_name == typedsearchkey || re.test(this.route_desc)){
+				return true;
+			} else { 
+				return false;
+			}
+		});
+		var sets = JSON.parse(updater.stringify());
+		if (updater.count()) {
+			$('#result').html('');
+			for (var i = 0; i < updater.count(); i++) {
+				sets[i];
+				addItem('set', sets[i]);
+				// console.log(sets);
+			};
+
+		} else {
+			$('#result').html('');
+			$('#result').append('<div class="list_item">'+'No results'+'</div> ');
+		}
+	})
 })(jQuery);
