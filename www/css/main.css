@@ -64,6 +64,9 @@ body{
     font-variant: normal;
     font-weight: 400;
     line-height: 20px;
+    display: flex;
+    height: 100vh;
+    
 }
 #wrapper{
     max-width: 480px;
